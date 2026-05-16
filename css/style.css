@@ -1,0 +1,1186 @@
+/* ============================================
+   LENSTORIES - 極簡編輯風格
+   Inspired by kkaa.co.jp
+   Enhanced with Rich Animations
+   ============================================ */
+
+/* CSS Variables */
+:root {
+    --primary: #292929;
+    --secondary: #808080;
+    --light-gray: #a3a3a3;
+    --bg: #ffffff;
+    --bg-alt: #f5f5f5;
+    --accent: #c9a227;
+    
+    /* Layout */
+    --max-width: 80rem;
+    --content-width: 61rem;
+    --section-gap: 3rem;
+    --block-gap: 1.2rem;
+    --grid-gap: 0.9rem;
+    
+    /* Typography */
+    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+    --font-serif: "Noto Serif TC", Georgia, serif;
+    --font-weight-light: 300;
+    --line-height: 1.8;
+    --letter-spacing: -0.02em;
+    
+    /* Animation timing */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-main);
+    font-weight: var(--font-weight-light);
+    background: var(--bg);
+    color: var(--primary);
+    line-height: var(--line-height);
+    letter-spacing: var(--letter-spacing);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+/* Page Loader */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s var(--ease-out-expo), visibility 0.6s;
+}
+
+.page-loader.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.loader-logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.loader-bar {
+    width: 120px;
+    height: 2px;
+    background: var(--bg-alt);
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.loader-bar::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    animation: loading 1.2s var(--ease-out-expo) infinite;
+}
+
+@keyframes loading {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.95); }
+}
+
+/* ============================================
+   Navigation - 極簡固定導航
+   ============================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 1.5rem 3vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.4s ease, padding 0.4s var(--ease-out-quart), box-shadow 0.4s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1rem 3vw;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: transform 0.3s var(--ease-out-expo);
+}
+
+.logo:hover {
+    transform: translateX(4px);
+}
+
+.logo-img-nav {
+    height: 32px;
+    width: auto;
+    transition: transform 0.4s var(--ease-out-expo);
+}
+
+.logo:hover .logo-img-nav {
+    transform: scale(1.05);
+}
+
+.logo-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.logo-img {
+    max-width: 280px;
+    height: auto;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--secondary);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.4s var(--ease-out-expo);
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Mobile Menu */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 1px;
+    background: var(--primary);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg);
+    z-index: 999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.6s cubic-bezier(.19,1,.22,1);
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+.mobile-menu a {
+    font-size: 1.5rem;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: 3px;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.4s ease, transform 0.4s var(--ease-out-expo), color 0.3s ease;
+}
+
+.mobile-menu.active a {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-menu.active a:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.active a:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu.active a:nth-child(3) { transition-delay: 0.2s; }
+.mobile-menu.active a:nth-child(4) { transition-delay: 0.25s; }
+
+.mobile-menu a:hover {
+    color: var(--accent);
+}
+
+/* ============================================
+   Hero Section - 大幅沉浸式
+   ============================================ */
+.hero {
+    min-height: 73vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 3vw;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+    pointer-events: none;
+}
+
+/* Floating particles */
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.15;
+    animation: float 15s infinite ease-in-out;
+}
+
+.particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 18s; }
+.particle:nth-child(2) { left: 20%; top: 60%; animation-delay: 2s; animation-duration: 22s; }
+.particle:nth-child(3) { left: 80%; top: 30%; animation-delay: 4s; animation-duration: 16s; }
+.particle:nth-child(4) { left: 70%; top: 70%; animation-delay: 1s; animation-duration: 20s; }
+.particle:nth-child(5) { left: 40%; top: 40%; animation-delay: 3s; animation-duration: 25s; }
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(20px, -30px) scale(1.2); }
+    50% { transform: translate(-10px, 20px) scale(0.8); }
+    75% { transform: translate(30px, 10px) scale(1.1); }
+}
+
+.hero-content {
+    max-width: var(--content-width);
+    position: relative;
+    z-index: 1;
+}
+
+/* Staggered reveal animation for hero */
+.hero-content > * {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.hero-logo {
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeInScale 0.8s var(--ease-out-expo) 0.3s forwards;
+}
+
+.logo-img {
+    max-width: 120px;
+    height: auto;
+}
+
+.hero .subtitle {
+    font-size: 0.75rem;
+    color: var(--secondary);
+    letter-spacing: 4px;
+    margin-bottom: 2rem;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeInUp 0.8s var(--ease-out-expo) 0.5s forwards;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    letter-spacing: 8px;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    opacity: 0;
+    animation: fadeInUp 0.8s var(--ease-out-expo) 0.7s forwards;
+}
+
+/* Text mask animation for h1 */
+.hero h1 {
+    background: linear-gradient(
+        90deg,
+        var(--primary) 0%,
+        var(--primary) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+}
+
+.hero h1::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s ease-in-out infinite;
+    animation-delay: 1.5s;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.hero .tagline {
+    font-size: 1.3rem;
+    color: var(--accent);
+    font-family: var(--font-serif);
+    margin-bottom: 2.5rem;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeInUp 0.8s var(--ease-out-expo) 0.9s forwards;
+}
+
+.hero .description {
+    max-width: 550px;
+    color: var(--secondary);
+    font-size: 1rem;
+    line-height: 2;
+    margin: 0 auto 3rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s var(--ease-out-expo) 1.1s forwards;
+}
+
+.creator-info {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+    padding-top: 2rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s var(--ease-out-expo) 1.3s forwards;
+}
+
+.creator-info p {
+    font-size: 0.8rem;
+    color: var(--secondary);
+    text-align: left;
+}
+
+.creator-info strong {
+    display: block;
+    color: var(--primary);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+}
+
+/* Hero Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 2s forwards;
+}
+
+.scroll-indicator span {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    color: var(--secondary);
+}
+
+.scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+    0%, 100% { opacity: 1; transform: scaleY(1); }
+    50% { opacity: 0.5; transform: scaleY(0.6); }
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ============================================
+   Three Pillars Section - 編輯卡片
+   ============================================ */
+.pillars {
+    padding: var(--section-gap) 3vw;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.pillars-header {
+    text-align: center;
+    margin-bottom: var(--section-gap);
+}
+
+.pillars h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    margin-bottom: 1rem;
+}
+
+.pillars h2 span {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--secondary);
+    font-weight: 400;
+    margin-top: 0.8rem;
+    letter-spacing: 3px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--grid-gap);
+}
+
+.card {
+    background: var(--bg);
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo), box-shadow 0.4s ease;
+}
+
+.card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered animation for cards */
+.card:nth-child(1) { transition-delay: 0s; }
+.card:nth-child(2) { transition-delay: 0.15s; }
+.card:nth-child(3) { transition-delay: 0.3s; }
+
+.card:hover {
+    box-shadow: 0 20px 60px -20px rgba(41, 41, 41, 0.15);
+    transform: translateY(-4px);
+}
+
+.card-image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--bg-alt);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Image reveal animation */
+.card-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+    opacity: 0.05;
+    transform: scale(0);
+    transform-origin: bottom right;
+    transition: transform 0.6s var(--ease-out-expo);
+}
+
+.card:hover .card-image::before {
+    transform: scale(1);
+}
+
+.card-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+    transition: height 0.4s ease;
+}
+
+.card:hover .card-image::after {
+    height: 70%;
+}
+
+.card-body {
+    padding: 1.5rem 0;
+}
+
+.card-number {
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 3px;
+    margin-bottom: 0.8rem;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+    font-family: var(--font-serif);
+    transition: color 0.3s ease;
+}
+
+.card:hover h3 {
+    color: var(--accent);
+}
+
+.card h4 {
+    font-size: 0.75rem;
+    color: var(--secondary);
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.card p {
+    color: var(--secondary);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tags span {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.8rem;
+    background: var(--bg-alt);
+    color: var(--secondary);
+    letter-spacing: 1px;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .tags span {
+    background: var(--primary);
+    color: var(--bg);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: var(--primary);
+    color: var(--bg);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    transition: background 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    transition: left 0.4s var(--ease-out-expo);
+    z-index: 0;
+}
+
+.btn span {
+    position: relative;
+    z-index: 1;
+}
+
+.btn:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -10px rgba(201, 162, 39, 0.4);
+}
+
+.btn:hover::before {
+    left: 0;
+}
+
+/* ============================================
+   Philosophy Section - 深色背景
+   ============================================ */
+.philosophy {
+    padding: 6rem 3vw;
+    background: var(--bg-alt);
+    color: var(--primary);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative line */
+.philosophy::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 0;
+    background: var(--accent);
+    transition: height 1s var(--ease-out-expo);
+}
+
+.philosophy.visible::before {
+    height: 60px;
+}
+
+.philosophy-content {
+    max-width: var(--content-width);
+    margin: 0 auto;
+}
+
+.philosophy h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    margin-bottom: 1rem;
+}
+
+.philosophy h2 span {
+    display: block;
+    font-size: 1.3rem;
+    font-family: var(--font-serif);
+    color: var(--accent);
+    margin-top: 1rem;
+    font-weight: 400;
+}
+
+.philosophy p {
+    font-size: 1rem;
+    line-height: 2;
+    color: var(--secondary);
+    margin-top: 2rem;
+}
+
+/* Text reveal animation */
+.philosophy p {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+
+.philosophy.visible p {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+/* ============================================
+   Core Values Section - 簡約網格
+   ============================================ */
+.values {
+    padding: var(--section-gap) 3vw;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.values-header {
+    text-align: center;
+    margin-bottom: var(--section-gap);
+}
+
+.values h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    margin-bottom: 1rem;
+}
+
+.values h2 span {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--secondary);
+    font-weight: 400;
+    margin-top: 0.8rem;
+    letter-spacing: 3px;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--block-gap);
+}
+
+.value {
+    text-align: left;
+    padding: 2rem 0;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+}
+
+.value.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered delay for values */
+.value:nth-child(1) { transition-delay: 0s; }
+.value:nth-child(2) { transition-delay: 0.1s; }
+.value:nth-child(3) { transition-delay: 0.2s; }
+.value:nth-child(4) { transition-delay: 0.3s; }
+
+.value:hover .value-number {
+    color: var(--accent);
+    transform: scale(1.1);
+}
+
+.value-number {
+    font-size: 2.5rem;
+    color: var(--light-gray);
+    font-weight: 300;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+    transition: color 0.4s ease, transform 0.4s var(--ease-out-expo);
+}
+
+.value h3 {
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin-bottom: 0.8rem;
+    font-family: var(--font-serif);
+    transition: color 0.3s ease;
+}
+
+.value:hover h3 {
+    color: var(--accent);
+}
+
+.value p {
+    color: var(--secondary);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+/* ============================================
+   Footer - 深色極簡底部
+   ============================================ */
+footer {
+    padding: 5rem 3vw;
+    background: var(--primary);
+    text-align: center;
+}
+
+.footer-logo {
+    margin-bottom: 2rem;
+}
+
+.footer-logo-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 6px;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.footer-logo-sub {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 3px;
+}
+
+.footer-logo-img {
+    max-width: 200px;
+    height: auto;
+    filter: brightness(0) invert(1);
+}
+
+footer p:first-child {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.footer-name {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.footer-brand {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+
+.copyright {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+}
+
+.credit {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.3);
+    margin-top: 0.5rem;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   Subpage Styles
+   ============================================ */
+.subpage {
+    padding-top: 80px;
+}
+
+.subpage-header {
+    padding: 6rem 3vw 4rem;
+    text-align: center;
+    background: var(--bg-alt);
+}
+
+.subpage-header h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    font-family: var(--font-serif);
+    letter-spacing: 4px;
+    margin-bottom: 1rem;
+}
+
+.subpage-header p {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    color: var(--secondary);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.subpage-content {
+    padding: 4rem 3vw;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 3rem;
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.back-link:hover {
+    color: var(--primary);
+    transform: translateX(-4px);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    letter-spacing: 3px;
+}
+
+.section-title span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--secondary);
+    font-weight: 400;
+    margin-top: 0.5rem;
+    letter-spacing: 2px;
+}
+
+/* Content Grid */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 2rem;
+}
+
+.content-card {
+    background: var(--bg);
+    overflow: hidden;
+    transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.content-card:hover {
+    box-shadow: 0 20px 60px -20px rgba(41, 41, 41, 0.12);
+    transform: translateY(-4px);
+}
+
+.content-card-image {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: var(--bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light-gray);
+    font-size: 0.8rem;
+}
+
+.content-card-body {
+    padding: 1.5rem 0;
+}
+
+.content-card-meta {
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.content-card h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+    font-family: var(--font-serif);
+}
+
+.content-card p {
+    color: var(--secondary);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+/* ============================================
+   Responsive - 平板與手機
+   ============================================ */
+@media (max-width: 1024px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-gap: 2rem;
+    }
+    
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu {
+        display: flex;
+    }
+    
+    .hero {
+        min-height: 80vh;
+    }
+    
+    .hero h1 {
+        letter-spacing: 4px;
+    }
+    
+    .creator-info {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .value {
+        text-align: center;
+    }
+    
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .subpage-header h1 {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+    
+    /* Disable particle animation on mobile */
+    .particle {
+        display: none;
+    }
+    
+    .scroll-indicator {
+        display: none;
+    }
+}
+
+/* ============================================
+   Scroll Reveal Effect
+   ============================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .particle {
+        display: none;
+    }
+}
