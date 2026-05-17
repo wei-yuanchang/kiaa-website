@@ -45,7 +45,7 @@ export default function Navbar() {
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
           >
             <Image
-              src="/logo-kiaa.png"
+              src="/kiaa-website/logo-kiaa.png"
               alt="KIAA"
               width={32}
               height={32}

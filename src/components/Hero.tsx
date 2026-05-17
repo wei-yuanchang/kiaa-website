@@ -55,7 +55,7 @@ export default function Hero() {
           className="mb-6"
         >
           <Image
-            src="/logo-kiaa.png"
+            src="/kiaa-website/logo-kiaa.png"
             alt="KIAA Logo"
             width={120}
             height={120}
