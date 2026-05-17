@@ -8,15 +8,15 @@ export default function Hero() {
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 400], [1, 0]);
 
-  // Split text animation
-  const headline = "建築 · 設計 · 敘事";
-  const words = headline.split(" ");
+  // Split text animation for new tagline
+  const headline = "設計力 · 投資力 · 傳承力";
+  const words = headline.split(" · ");
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-gray-100" />
-      
+
       {/* Floating Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(5)].map((_, i) => (
@@ -71,13 +71,13 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          WKY — WEI-YUAN (KEN) / 謙山敘事
+          WEI-YUAN (KEN) / 謙山敘事
         </motion.p>
 
-        {/* Animated Headline - Word by Word */}
+        {/* Animated Headline - Three Powers */}
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-wider mb-6">
           {words.map((word, wordIndex) => (
-            <span key={wordIndex} className="inline-block mx-2">
+            <span key={wordIndex} className="inline-block mx-2 md:mx-4">
               {word.split("").map((char, charIndex) => (
                 <motion.span
                   key={`${wordIndex}-${charIndex}`}
@@ -93,7 +93,7 @@ export default function Hero() {
                     y: 0 
                   }}
                   transition={{
-                    delay: 0.5 + (wordIndex * 3 + charIndex) * 0.05,
+                    delay: 0.5 + (wordIndex * 4 + charIndex) * 0.05,
                     duration: 0.7,
                     ease: [0.25, 0.46, 0.45, 0.94],
                   }}
@@ -105,36 +105,62 @@ export default function Hero() {
           ))}
         </h1>
 
-        {/* Tagline with fade in */}
+        {/* Main Tagline - New Brand Message */}
         <motion.p
-          className="text-xl md:text-2xl font-serif text-accent mb-8 tracking-wider"
+          className="text-lg md:text-xl font-serif text-accent mb-6 leading-relaxed max-w-2xl"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
         >
-          謙山敘事 · Mountain Narrative
+          空間架構決策者
         </motion.p>
 
-        {/* Description */}
+        {/* Description - New Brand Story */}
         <motion.p
-          className="max-w-xl mx-auto text-secondary leading-relaxed mb-12"
+          className="max-w-xl mx-auto text-secondary leading-relaxed mb-8 text-base md:text-lg"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.8 }}
         >
-          以鏡頭觀察世界，以雙手建造空間，以文字記錄思想。探索個人創作與建築教育的跨界可能。
+          拒絕低效勞務，用系統定義規則。整合設計力、投資力與傳承力，
+          為您建構兼具美學與價值的空間解決方案。
         </motion.p>
+
+        {/* Three Identities */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-4 md:gap-8 mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.6, duration: 0.8 }}
+        >
+          {[
+            { name: "謙山敘事", desc: "思想" },
+            { name: "謙光學舍", desc: "教育" },
+            { name: "謙一建築", desc: "設計" },
+          ].map((item, index) => (
+            <motion.div
+              key={item.name}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.7 + index * 0.1 }}
+              className="px-4 py-2 border border-gray-200 hover:border-accent hover:bg-accent/5 transition-all duration-300"
+            >
+              <span className="block text-sm font-medium text-primary">{item.name}</span>
+              <span className="text-xs text-secondary">{item.desc}</span>
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* Creator Info */}
         <motion.div
           className="flex flex-wrap justify-center gap-8 md:gap-16"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.8 }}
+          transition={{ delay: 1.8, duration: 0.8 }}
         >
           {[
-            { label: "創作者", value: "Wei-Yuan (Ken)" },
-            { label: "領域", value: "建築 · 設計 · 教育" },
+            { label: "創作者", value: "張維元 (Ken)" },
+            { label: "專業", value: "建築 · 空間 · 系統" },
             { label: "地點", value: "台中" },
           ].map((item, index) => (
             <motion.p
@@ -142,7 +168,7 @@ export default function Hero() {
               className="text-sm text-secondary text-left"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.7 + index * 0.1 }}
+              transition={{ delay: 1.9 + index * 0.1 }}
             >
               <span className="block text-xs tracking-widest text-primary font-medium mb-1">
                 {item.label}
