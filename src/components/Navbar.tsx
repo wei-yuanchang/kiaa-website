@@ -1,10 +1,9 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 const navLinks = [
   { href: "#stories", label: "敘事" },
@@ -30,8 +29,8 @@ export default function Navbar() {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-xl shadow-sm py-4"
-            : "bg-transparent py-6"
+            ? "bg-white/95 backdrop-blur-xl shadow-sm py-3"
+            : "bg-transparent py-5"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -40,34 +39,34 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
           <motion.div
-            className="flex items-center gap-3 cursor-pointer"
-            whileHover={{ x: 4 }}
+            className="flex items-center gap-2 cursor-pointer"
+            whileHover={{ x: 3 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
           >
             <Image
               src="/kiaa-website/logo-kiaa.png"
               alt="KIAA"
-              width={32}
-              height={32}
-              className="h-8 w-auto"
+              width={28}
+              height={28}
+              className="h-7 w-auto"
             />
+            <span className="text-sm font-medium text-primary tracking-wider">KIAA</span>
           </motion.div>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex gap-10">
+          {/* Desktop Nav - Consistent sizing */}
+          <div className="hidden md:flex gap-8">
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.href}
                 href={link.href}
-                className="text-sm tracking-widest text-secondary hover:text-primary transition-colors relative"
+                className="text-sm tracking-widest text-secondary hover:text-primary transition-colors relative py-2"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index, duration: 0.5 }}
-                whileHover={{}}
               >
                 {link.label}
                 <motion.span
-                  className="absolute -bottom-1 left-0 h-px bg-accent origin-left"
+                  className="absolute bottom-0 left-0 h-px bg-accent origin-left"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -79,18 +78,18 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden p-2"
+            className="md:hidden p-2 text-primary"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             whileTap={{ scale: 0.9 }}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </motion.button>
         </div>
       </motion.nav>
 
       {/* Mobile Menu */}
       <motion.div
-        className={`fixed inset-0 bg-white z-40 flex flex-col justify-center items-center gap-8 md:hidden`}
+        className={`fixed inset-0 bg-white z-40 flex flex-col justify-center items-center gap-6 md:hidden`}
         initial={{ x: "100%" }}
         animate={{ x: isMobileMenuOpen ? "0%" : "100%" }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -99,7 +98,7 @@ export default function Navbar() {
           <motion.a
             key={link.href}
             href={link.href}
-            className="text-2xl tracking-widest text-primary"
+            className="text-xl tracking-widest text-primary"
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: isMobileMenuOpen ? 1 : 0, x: isMobileMenuOpen ? 0 : 40 }}
             transition={{ delay: 0.1 * index, duration: 0.4 }}

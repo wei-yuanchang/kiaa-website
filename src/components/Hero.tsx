@@ -5,60 +5,45 @@ import Image from "next/image";
 
 export default function Hero() {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const y = useTransform(scrollY, [0, 500], [0, 100]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
-  // Split text animation for new tagline
-  const headline = "設計力 · 投資力 · 傳承力";
-  const words = headline.split(" · ");
+  // Three pillars
+  const pillars = [
+    { name: "謙山敘事", label: "思想" },
+    { name: "謙光學舍", label: "教育" },
+    { name: "謙一建築", label: "設計" },
+  ];
+
+  // Creator info
+  const creatorInfo = [
+    { label: "創作者", value: "張維元 (Ken)" },
+    { label: "專業", value: "建築 · 空間 · 系統" },
+    { label: "地點", value: "台中" },
+  ];
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden pt-24 pb-16">
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-gray-100" />
-
-      {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-accent/20 rounded-full"
-            style={{
-              left: `${20 + i * 15}%`,
-              top: `${20 + i * 10}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              x: [0, 20, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 15 + i * 2,
-              repeat: Infinity,
-              delay: i * 2,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-gray-50" />
 
       {/* Main Content */}
       <motion.div 
-        className="relative z-10 text-center px-6 max-w-4xl"
+        className="relative z-10 text-center px-6 max-w-4xl w-full"
         style={{ y, opacity }}
       >
-        {/* Logo with scale animation */}
+        {/* Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-6"
+          className="mb-8"
         >
           <Image
             src="/kiaa-website/logo-kiaa.png"
             alt="KIAA Logo"
-            width={120}
-            height={120}
+            width={80}
+            height={80}
             className="mx-auto"
             priority
           />
@@ -66,7 +51,7 @@ export default function Hero() {
 
         {/* Subtitle */}
         <motion.p
-          className="text-xs tracking-[0.3em] text-secondary mb-8"
+          className="text-xs tracking-[0.25em] text-secondary mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
@@ -74,122 +59,94 @@ export default function Hero() {
           WEI-YUAN (KEN) / 謙山敘事
         </motion.p>
 
-        {/* Animated Headline - Three Powers */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-wider mb-6">
-          {words.map((word, wordIndex) => (
-            <span key={wordIndex} className="inline-block mx-2 md:mx-4">
-              {word.split("").map((char, charIndex) => (
-                <motion.span
-                  key={`${wordIndex}-${charIndex}`}
-                  className="inline-block"
-                  initial={{ 
-                    filter: "blur(10px)", 
-                    opacity: 0, 
-                    y: 40 
-                  }}
-                  animate={{ 
-                    filter: "blur(0px)", 
-                    opacity: 1, 
-                    y: 0 
-                  }}
-                  transition={{
-                    delay: 0.5 + (wordIndex * 4 + charIndex) * 0.05,
-                    duration: 0.7,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  }}
-                >
-                  {char}
-                </motion.span>
-              ))}
-            </span>
-          ))}
-        </h1>
-
-        {/* Main Tagline - New Brand Message */}
-        <motion.p
-          className="text-lg md:text-xl font-serif text-accent mb-6 leading-relaxed max-w-2xl"
+        {/* Main Headline */}
+        <motion.h1
+          className="text-3xl md:text-5xl lg:text-6xl font-light tracking-wide mb-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          <span className="inline-block mx-1 md:mx-3 text-primary">設計力</span>
+          <span className="inline-block mx-1 md:mx-3 text-secondary">·</span>
+          <span className="inline-block mx-1 md:mx-3 text-primary">投資力</span>
+          <span className="inline-block mx-1 md:mx-3 text-secondary">·</span>
+          <span className="inline-block mx-1 md:mx-3 text-primary">傳承力</span>
+        </motion.h1>
+
+        {/* Tagline - Centered */}
+        <motion.p
+          className="text-base md:text-lg font-serif text-accent mb-4 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
         >
           空間架構決策者
         </motion.p>
 
-        {/* Description - New Brand Story */}
+        {/* Description */}
         <motion.p
-          className="max-w-xl mx-auto text-secondary leading-relaxed mb-8 text-base md:text-lg"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-sm text-secondary leading-relaxed mb-8 max-w-md mx-auto text-center"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.8 }}
+          transition={{ delay: 1.0, duration: 0.6 }}
         >
           拒絕低效勞務，用系統定義規則。整合設計力、投資力與傳承力，
           為您建構兼具美學與價值的空間解決方案。
         </motion.p>
 
-        {/* Three Identities */}
+        {/* Three Identities - Consistent Grid */}
         <motion.div
-          className="flex flex-wrap justify-center gap-4 md:gap-8 mb-10"
-          initial={{ opacity: 0, y: 30 }}
+          className="flex flex-wrap justify-center gap-3 md:gap-6 mb-8"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.8 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
         >
-          {[
-            { name: "謙山敘事", desc: "思想" },
-            { name: "謙光學舍", desc: "教育" },
-            { name: "謙一建築", desc: "設計" },
-          ].map((item, index) => (
+          {pillars.map((item, index) => (
             <motion.div
               key={item.name}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.7 + index * 0.1 }}
-              className="px-4 py-2 border border-gray-200 hover:border-accent hover:bg-accent/5 transition-all duration-300"
+              transition={{ delay: 1.3 + index * 0.1 }}
+              className="px-5 py-3 border border-gray-200 hover:border-accent hover:bg-accent/5 transition-all duration-300 min-w-[120px]"
             >
               <span className="block text-sm font-medium text-primary">{item.name}</span>
-              <span className="text-xs text-secondary">{item.desc}</span>
+              <span className="text-xs text-secondary">{item.label}</span>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Creator Info */}
+        {/* Creator Info - Grid with consistent widths */}
         <motion.div
-          className="flex flex-wrap justify-center gap-8 md:gap-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.8, duration: 0.8 }}
+          className="flex flex-wrap justify-center gap-6 md:gap-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 0.6 }}
         >
-          {[
-            { label: "創作者", value: "張維元 (Ken)" },
-            { label: "專業", value: "建築 · 空間 · 系統" },
-            { label: "地點", value: "台中" },
-          ].map((item, index) => (
-            <motion.p
+          {creatorInfo.map((item, index) => (
+            <div
               key={item.label}
-              className="text-sm text-secondary text-left"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.9 + index * 0.1 }}
+              className="text-left min-w-[100px]"
             >
               <span className="block text-xs tracking-widest text-primary font-medium mb-1">
                 {item.label}
               </span>
-              {item.value}
-            </motion.p>
+              <span className="text-sm text-secondary">{item.value}</span>
+            </div>
           ))}
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - Moved down, not overlapping */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
+        transition={{ delay: 1.8, duration: 1 }}
       >
-        <span className="text-xs tracking-[0.3em] text-secondary">SCROLL</span>
+        <span className="text-xs tracking-[0.25em] text-secondary/60">SCROLL</span>
         <motion.div
-          className="w-px h-10 bg-gradient-to-b from-accent to-transparent"
-          animate={{ scaleY: [1, 0.5, 1], opacity: [1, 0.5, 1] }}
+          className="w-px h-8 bg-gradient-to-b from-accent/60 to-transparent"
+          animate={{ scaleY: [1, 0.5, 1], opacity: [0.6, 1, 0.6] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
       </motion.div>
