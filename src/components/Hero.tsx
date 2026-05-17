@@ -76,7 +76,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.7, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="mb-6"
+          className="mb-10"
         >
           <motion.div
             animate={{ 
@@ -98,7 +98,7 @@ export default function Hero() {
 
         {/* Subtitle - Tight spacing */}
         <motion.p
-          className="text-[10px] tracking-[0.35em] text-[#6b6b6b] mb-4 uppercase"
+          className="text-[10px] tracking-[0.35em] text-[#6b6b6b] mb-6 uppercase"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
@@ -108,7 +108,7 @@ export default function Hero() {
 
         {/* Main Headline - Premium typography with letter animation */}
         <motion.h1
-          className="text-[24px] md:text-[36px] lg:text-[44px] font-light tracking-tight text-[#1a1a1a] mb-3 leading-tight"
+          className="text-[24px] md:text-[36px] lg:text-[44px] font-light tracking-tight text-[#1a1a1a] mb-6 leading-tight"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.7 }}
@@ -128,7 +128,7 @@ export default function Hero() {
 
         {/* Tagline - Serif accent */}
         <motion.p
-          className="text-base md:text-lg font-serif text-[#c9a227] mb-3 text-center"
+          className="text-base md:text-lg font-serif text-[#c9a227] mb-6 text-center"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.6 }}
@@ -138,7 +138,7 @@ export default function Hero() {
 
         {/* Description - Tight spacing */}
         <motion.p
-          className="text-xs md:text-sm text-[#6b6b6b] leading-relaxed mb-4 max-w-md mx-auto text-center"
+          className="text-xs md:text-sm text-[#6b6b6b] leading-relaxed mb-6 max-w-md mx-auto text-center"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.6 }}
@@ -149,7 +149,7 @@ export default function Hero() {
 
         {/* Premium Divider with extend animation */}
         <motion.div
-          className="w-12 h-[1px] bg-[#c9a227] mx-auto mb-4"
+          className="w-12 h-[1px] bg-[#c9a227] mx-auto mb-8"
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.5 }}
@@ -157,7 +157,7 @@ export default function Hero() {
 
         {/* Three Identities - Premium cards with stagger + hover animation */}
         <motion.div
-          className="flex flex-wrap justify-center gap-2 md:gap-4 mb-0"
+          className="flex flex-wrap justify-center gap-3 md:gap-5 mb-10"
           initial="hidden"
           animate="visible"
         >
