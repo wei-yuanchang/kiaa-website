@@ -130,13 +130,18 @@ export default function Hero() {
           transition={{ delay: 1.1, duration: 0.5 }}
         />
 
-        {/* Three Identities */}
+        {/* Four Identities */}
         <motion.div
           className="flex flex-wrap justify-center gap-3 md:gap-5"
           initial="hidden"
           animate="visible"
         >
-          {pillars.map((item, index) => (
+          {[
+            { name: "謙山敘事", label: "思想" },
+            { name: "謙一築境", label: "設計" },
+            { name: "謙光書院", label: "教育" },
+            { name: "謙境方外", label: "創意" },
+          ].map((item, index) => (
             <motion.div
               key={item.name}
               initial={{ opacity: 0, y: 25, scale: 0.9 }}
@@ -148,7 +153,7 @@ export default function Hero() {
                 borderColor: '#c9a227',
                 boxShadow: "0 10px 40px rgba(201, 162, 39, 0.15)"
               }}
-              className="px-4 py-3 border border-[#e8e7e4] hover:bg-[#c9a227]/[0.03] transition-all duration-300 min-w-[110px] md:min-w-[130px]"
+              className="px-4 py-3 border border-[#e8e7e4] hover:bg-[#c9a227]/[0.03] transition-all duration-300 min-w-[100px] md:min-w-[120px]"
             >
               <motion.span 
                 className="block text-sm font-medium text-[#1a1a1a] mb-0.5"

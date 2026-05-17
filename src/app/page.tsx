@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ThreePillars from "@/components/ThreePillars";
+import Systems from "@/components/Systems";
 import Philosophy from "@/components/Philosophy";
 import About from "@/components/About";
 import CoreValues from "@/components/CoreValues";
@@ -14,6 +15,7 @@ export default function Home() {
       <main>
         <Hero />
         <ThreePillars />
+        <Systems />
         <Philosophy />
         <About />
         <CoreValues />

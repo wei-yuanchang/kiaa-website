@@ -17,20 +17,29 @@ const pillars = [
   {
     number: "02",
     label: "設計",
-    title: "謙一建築",
-    subtitle: "Kenichi Architect",
-    description: "建築設計事務所，專注於住宅、商業空間與室內設計。每一個專案都是對場所精神的探索。",
-    tags: ["建築", "室內", "家具"],
+    title: "謙一築境",
+    subtitle: "Kenichi Space",
+    description: "建築設計事務所，專注於住宅、商業空間與室內設計。為業主打造有氛圍的精神境界。",
+    tags: ["建築", "室內", "築境"],
     href: "/kenichi-architect",
   },
   {
     number: "03",
     label: "教育",
-    title: "謙光學舍",
-    subtitle: "Kenko",
+    title: "謙光書院",
+    subtitle: "Kenko Academy",
     description: "建築設計教育平台，提供線上課程、文章與資源分享。傳承知識，培育下一代的設計者。",
     tags: ["建築教育", "線上課程", "資源"],
     href: "/kenko",
+  },
+  {
+    number: "04",
+    label: "創意",
+    title: "謙境方外",
+    subtitle: "Beyond the Realm",
+    description: "仙俠與乾坤宇宙，世俗之外的神仙境界。一芥子藏大千，裡面裝著宏大的奇幻史詩。",
+    tags: ["小說", "奇幻", "仙俠"],
+    href: "/yijie",
   },
 ];
 
@@ -52,16 +61,16 @@ export default function ThreePillars() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Three Pillars
+          Four Pillars
         </motion.span>
         <h2 className="text-[28px] md:text-[36px] font-light tracking-tight text-[#1a1a1a] mb-4">
-          三個品牌，一種信念
+          四個品牌，一種信念
         </h2>
         <div className="w-12 h-[2px] bg-[#c9a227] mx-auto" />
       </motion.div>
 
-      {/* Cards Grid - Premium cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Cards Grid - 2x2 on desktop, 1 column on mobile */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {pillars.map((pillar, index) => (
           <motion.div
             key={pillar.number}
@@ -69,13 +78,13 @@ export default function ThreePillars() {
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: index * 0.15, duration: 0.7 }}
+            transition={{ delay: index * 0.1, duration: 0.7 }}
             whileHover={{ y: -8 }}
           >
             {/* Card Image - Premium placeholder */}
             <motion.div
-              className="aspect-[4/3] bg-gradient-to-br from-[#f5f4f0] to-[#e8e7e4] relative overflow-hidden mb-6"
-              whileHover={{ scale: 1.05 }}
+              className="aspect-[16/9] bg-gradient-to-br from-[#f5f4f0] to-[#e8e7e4] relative overflow-hidden mb-6"
+              whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.5 }}
             >
               {/* Subtle overlay pattern */}

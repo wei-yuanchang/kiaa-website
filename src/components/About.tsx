@@ -106,14 +106,15 @@ export default function About() {
               </div>
             </div>
 
-            {/* Three Identities Preview */}
+            {/* Four Identities Preview */}
             <div>
-              <h3 className="text-xl font-serif font-light mb-6 text-[#c9a227]">三個身份</h3>
+              <h3 className="text-xl font-serif font-light mb-6 text-[#c9a227]">四個身份</h3>
               <div className="space-y-3">
                 {[
                   { name: "謙山敘事", en: "Mountain Narrative", priority: "優先" },
-                  { name: "謙光學舍", en: "Kenko", priority: "其次" },
-                  { name: "謙一建築", en: "Kenichi Architect", priority: "其三" },
+                  { name: "謙一築境", en: "Kenichi Space", priority: "其次" },
+                  { name: "謙光書院", en: "Kenko Academy", priority: "其三" },
+                  { name: "謙境方外", en: "Beyond the Realm", priority: "其四" },
                 ].map((item, index) => (
                   <motion.div 
                     key={item.name}
