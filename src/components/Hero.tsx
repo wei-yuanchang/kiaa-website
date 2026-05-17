@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
@@ -40,7 +40,7 @@ export default function Hero() {
         transition={{ delay: 1.8, duration: 0.8 }}
       />
 
-      {/* Floating Particles - Sophisticated gold specks with MORE animation */}
+      {/* Floating Particles - Sophisticated gold specks */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(12)].map((_, i) => (
           <motion.div
@@ -71,47 +71,22 @@ export default function Hero() {
         className="relative z-10 text-center px-8 max-w-5xl w-full"
         style={{ y, opacity }}
       >
-        {/* Logo with premium entrance + pulse animation */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.7, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="mb-10"
-        >
-          <motion.div
-            animate={{ 
-              scale: [1, 1.05, 1],
-              filter: ["brightness(1)", "brightness(1.1)", "brightness(1)"]
-            }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Image
-              src="/kiaa-website/logo-kiaa.png"
-              alt="KIAA Logo"
-              width={64}
-              height={64}
-              className="mx-auto drop-shadow-sm"
-              priority
-            />
-          </motion.div>
-        </motion.div>
-
-        {/* Subtitle - Tight spacing */}
+        {/* Subtitle */}
         <motion.p
           className="text-[10px] tracking-[0.35em] text-[#6b6b6b] mb-6 uppercase"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
         >
           WEI-YUAN (KEN) · 謙山敘事
         </motion.p>
 
-        {/* Main Headline - Premium typography with letter animation */}
+        {/* Main Headline */}
         <motion.h1
           className="text-[24px] md:text-[36px] lg:text-[44px] font-light tracking-tight text-[#1a1a1a] mb-6 leading-tight"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.7 }}
+          transition={{ delay: 0.4, duration: 0.7 }}
         >
           {["設計力", "·", "投資力", "·", "傳承力"].map((text, i) => (
             <motion.span
@@ -119,45 +94,45 @@ export default function Hero() {
               className={text === "·" ? "text-[#c9a227]" : "text-[#1a1a1a]"}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 + i * 0.08, duration: 0.5 }}
+              transition={{ delay: 0.5 + i * 0.08, duration: 0.5 }}
             >
               <span className="inline-block mx-1 md:mx-2">{text}</span>
             </motion.span>
           ))}
         </motion.h1>
 
-        {/* Tagline - Serif accent */}
+        {/* Tagline */}
         <motion.p
           className="text-base md:text-lg font-serif text-[#c9a227] mb-6 text-center"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
         >
           空間架構決策者
         </motion.p>
 
-        {/* Description - Tight spacing */}
+        {/* Description */}
         <motion.p
           className="text-xs md:text-sm text-[#6b6b6b] leading-relaxed mb-6 max-w-md mx-auto text-center"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0, duration: 0.6 }}
+          transition={{ delay: 0.9, duration: 0.6 }}
         >
           拒絕低效勞務，用系統定義規則。整合設計力、投資力與傳承力，
           <br className="hidden md:block" />為您建構兼具美學與價值的空間解決方案。
         </motion.p>
 
-        {/* Premium Divider with extend animation */}
+        {/* Premium Divider */}
         <motion.div
           className="w-12 h-[1px] bg-[#c9a227] mx-auto mb-8"
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.5 }}
+          transition={{ delay: 1.1, duration: 0.5 }}
         />
 
-        {/* Three Identities - Premium cards with stagger + hover animation */}
+        {/* Three Identities */}
         <motion.div
-          className="flex flex-wrap justify-center gap-3 md:gap-5 mb-10"
+          className="flex flex-wrap justify-center gap-3 md:gap-5"
           initial="hidden"
           animate="visible"
         >
@@ -166,7 +141,7 @@ export default function Hero() {
               key={item.name}
               initial={{ opacity: 0, y: 25, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 1.3 + index * 0.1, duration: 0.5 }}
+              transition={{ delay: 1.2 + index * 0.1, duration: 0.5 }}
               whileHover={{ 
                 y: -8, 
                 scale: 1.03, 
@@ -188,7 +163,23 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* NO Scroll indicator - removed as requested */}
+      {/* Bottom Logo - Inverted style (white on dark) */}
+      <motion.div 
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+      >
+        <div className="w-16 h-16 border border-white/40 flex items-center justify-center">
+          <Image
+            src="/kiaa-website/logo-kiaa.png"
+            alt="KIAA"
+            width={40}
+            height={40}
+            className="brightness-0 invert opacity-80"
+          />
+        </div>
+      </motion.div>
     </section>
   );
 }
