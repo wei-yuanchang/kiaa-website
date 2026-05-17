@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
-/* KIAA Design System - Simplified Typography
-   謙山敘事設計系統 - 精簡版字體系統
+/* KIAA Design System - Unified Typography
+   謙山敘事設計系統 - 統一字體
    只使用 4 種主要字體大小 */
 
 /* KIAA Type Scale - 4 Levels Only
    =================================
-   Level 1 (Display):  text-3xl md:text-5xl lg:text-6xl  - 主要標題
-   Level 2 (Heading):   text-xl md:text-2xl              - 次要標題
-   Level 3 (Body):      text-sm md:text-base              - 內文
-   Level 4 (Caption):   text-xs                           - 說明文字
+   Level 1 (Display):  text-2xl md:text-4xl lg:text-5xl  - 主要標題
+   Level 2 (Heading):   text-base md:text-lg              - 次要標題
+   Level 3 (Body):     text-sm                           - 內文
+   Level 4 (Caption):  text-xs                           - 說明文字
 */
 
 :root {
@@ -21,24 +21,18 @@
   --color-bg-alt: #f5f5f5;
   --color-accent: #c9a227;
 
-  /* Typography Scale */
-  --text-display: 1.875rem;      /* 30px */
-  --text-heading: 1.25rem;       /* 20px */
-  --text-body: 0.875rem;          /* 14px */
-  --text-caption: 0.75rem;        /* 12px */
+  /* Unified English Typography - Inter Font */
+  --font-main: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Inter", "Noto Serif TC", Georgia, serif;
 
-  /* Spacing */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 4rem;
-
-  /* Typography */
-  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-serif: var(--font-serif), "Noto Serif TC", Georgia, serif;
+  /* Spacing - Tight */
+  --space-xs: 0.125rem;  /* 2px */
+  --space-sm: 0.25rem;   /* 4px */
+  --space-md: 0.5rem;    /* 8px */
+  --space-lg: 0.75rem;   /* 12px */
+  --space-xl: 1rem;      /* 16px */
+  --space-2xl: 1.5rem;   /* 24px */
+  --space-3xl: 2rem;     /* 32px */
 }
 
 /* Tailwind Theme Integration */
@@ -62,38 +56,41 @@ body {
   color: var(--color-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: var(--text-body);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
-/* Serif for headings */
+/* Unified font-family for all text */
+* {
+  font-family: var(--font-main);
+}
+
+/* Serif only for accent text */
 .font-serif {
   font-family: var(--font-serif);
 }
 
 /* KIAA Text Utilities - 4 Levels Only */
 .text-display {
-  font-size: var(--text-display);
+  font-size: clamp(1.5rem, 4vw, 3rem);
   font-weight: 300;
   line-height: 1.2;
   letter-spacing: 0.02em;
 }
 
 .text-heading {
-  font-size: var(--text-heading);
+  font-size: clamp(1rem, 2vw, 1.25rem);
   font-weight: 400;
   line-height: 1.3;
 }
 
 .text-body {
-  font-size: var(--text-body);
-  line-height: 1.6;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 .text-caption {
-  font-size: var(--text-caption);
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 /* Color utilities */
@@ -107,16 +104,8 @@ body {
 .bg-accent { background-color: var(--color-accent); }
 
 /* Letter spacing */
-.tracking-widest { letter-spacing: 0.2em; }
+.tracking-widest { letter-spacing: 0.15em; }
 .tracking-wide { letter-spacing: 0.05em; }
-
-/* Section spacing */
-.section-padding {
-  padding-top: var(--space-3xl);
-  padding-bottom: var(--space-3xl);
-  padding-left: var(--space-md);
-  padding-right: var(--space-md);
-}
 
 /* Consistent card styling */
 .card {
@@ -138,7 +127,7 @@ body {
   padding: var(--space-sm) var(--space-md);
   background-color: var(--color-primary);
   color: white;
-  font-size: var(--text-caption);
+  font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   transition: background-color 0.3s ease;
@@ -162,6 +151,16 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Floating particle animation */
+@keyframes float-particle {
+  0%, 100% {
+transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(15px, -20px) scale(1.2);
   }
 }
 

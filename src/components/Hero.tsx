@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Hero() {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 100]);
+  const y = useTransform(scrollY, [0, 500], [0, 80]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   // Three pillars
@@ -23,21 +23,46 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden pt-24 pb-16">
+    <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-gray-50" />
+
+      {/* Floating Particles - Restored */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-accent/20 rounded-full"
+            style={{
+              left: `${20 + i * 15}%`,
+              top: `${20 + i * 10}%`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              x: [0, 15, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 12 + i * 2,
+              repeat: Infinity,
+              delay: i * 2,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
 
       {/* Main Content */}
       <motion.div 
         className="relative z-10 text-center px-6 max-w-4xl w-full"
         style={{ y, opacity }}
       >
-        {/* Logo */}
+        {/* Logo - Restored scale animation */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8"
+          className="mb-4"
         >
           <Image
             src="/kiaa-website/logo-kiaa.png"
@@ -49,65 +74,74 @@ export default function Hero() {
           />
         </motion.div>
 
-        {/* Subtitle */}
+        {/* Subtitle - Tight spacing */}
         <motion.p
-          className="text-xs tracking-[0.25em] text-secondary mb-6"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-xs tracking-[0.25em] text-secondary mb-2"
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
         >
           WEI-YUAN (KEN) / 謙山敘事
         </motion.p>
 
-        {/* Main Headline */}
+        {/* Main Headline - Smaller size (3/4 of previous) */}
         <motion.h1
-          className="text-3xl md:text-5xl lg:text-6xl font-light tracking-wide mb-4"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
-          <span className="inline-block mx-1 md:mx-3 text-primary">設計力</span>
-          <span className="inline-block mx-1 md:mx-3 text-secondary">·</span>
-          <span className="inline-block mx-1 md:mx-3 text-primary">投資力</span>
-          <span className="inline-block mx-1 md:mx-3 text-secondary">·</span>
-          <span className="inline-block mx-1 md:mx-3 text-primary">傳承力</span>
-        </motion.h1>
-
-        {/* Tagline - Centered */}
-        <motion.p
-          className="text-base md:text-lg font-serif text-accent mb-4 text-center"
+          className="text-2xl md:text-4xl lg:text-5xl font-light tracking-wide mb-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+        >
+          <span className="inline-block mx-1 md:mx-2 text-primary">設計力</span>
+          <span className="inline-block mx-1 md:mx-2 text-secondary/50">·</span>
+          <span className="inline-block mx-1 md:mx-2 text-primary">投資力</span>
+          <span className="inline-block mx-1 md:mx-2 text-secondary/50">·</span>
+          <span className="inline-block mx-1 md:mx-2 text-primary">傳承力</span>
+        </motion.h1>
+
+        {/* Tagline - Tight spacing */}
+        <motion.p
+          className="text-sm md:text-base font-serif text-accent mb-2 text-center"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.5 }}
         >
           空間架構決策者
         </motion.p>
 
-        {/* Description */}
+        {/* Description - Tight spacing */}
         <motion.p
-          className="text-sm text-secondary leading-relaxed mb-8 max-w-md mx-auto text-center"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-xs text-secondary leading-relaxed mb-4 max-w-md mx-auto text-center"
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0, duration: 0.6 }}
+          transition={{ delay: 0.9, duration: 0.5 }}
         >
           拒絕低效勞務，用系統定義規則。整合設計力、投資力與傳承力，
           為您建構兼具美學與價值的空間解決方案。
         </motion.p>
 
-        {/* Three Identities - Consistent Grid */}
+        {/* Three Identities - Restored stagger animation */}
         <motion.div
-          className="flex flex-wrap justify-center gap-3 md:gap-6 mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
+          className="flex flex-wrap justify-center gap-2 md:gap-4 mb-4"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
         >
           {pillars.map((item, index) => (
             <motion.div
               key={item.name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.3 + index * 0.1 }}
-              className="px-5 py-3 border border-gray-200 hover:border-accent hover:bg-accent/5 transition-all duration-300 min-w-[120px]"
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 1.0 + index * 0.1, duration: 0.5 }}
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="px-4 py-2 border border-gray-200 hover:border-accent hover:bg-accent/5 transition-all duration-300 min-w-[100px]"
             >
               <span className="block text-sm font-medium text-primary">{item.name}</span>
               <span className="text-xs text-secondary">{item.label}</span>
@@ -115,40 +149,28 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        {/* Creator Info - Grid with consistent widths */}
+        {/* Creator Info - Restored animation */}
         <motion.div
-          className="flex flex-wrap justify-center gap-6 md:gap-12"
+          className="flex flex-wrap justify-center gap-4 md:gap-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.6 }}
+          transition={{ delay: 1.4, duration: 0.5 }}
         >
           {creatorInfo.map((item, index) => (
-            <div
+            <motion.div
               key={item.label}
-              className="text-left min-w-[100px]"
+              initial={{opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5 + index * 0.1 }}
+              className="text-left min-w-[80px]"
             >
-              <span className="block text-xs tracking-widest text-primary font-medium mb-1">
+              <span className="block text-xs tracking-widest text-primary font-medium mb-0.5">
                 {item.label}
               </span>
-              <span className="text-sm text-secondary">{item.value}</span>
-            </div>
+              <span className="text-xs text-secondary">{item.value}</span>
+            </motion.div>
           ))}
         </motion.div>
-      </motion.div>
-
-      {/* Scroll Indicator - Moved down, not overlapping */}
-      <motion.div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 1 }}
-      >
-        <span className="text-xs tracking-[0.25em] text-secondary/60">SCROLL</span>
-        <motion.div
-          className="w-px h-8 bg-gradient-to-b from-accent/60 to-transparent"
-          animate={{ scaleY: [1, 0.5, 1], opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
       </motion.div>
     </section>
   );
