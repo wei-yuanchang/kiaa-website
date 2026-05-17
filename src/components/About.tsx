@@ -106,31 +106,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* Design Traits - Premium grid */}
-            <div>
-              <h3 className="text-xl font-serif font-light mb-6 text-[#c9a227]">設計特質</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  { label: "人類圖類型", value: "顯示生產者" },
-                  { label: "人生角色", value: "2/4（隱士 / 橋樑）" },
-                  { label: "馬雅印記", value: "藍鷹（宏觀視野）" },
-                  { label: "非自己主題", value: "挫敗感 → 回應" },
-                ].map((item, index) => (
-                  <motion.div 
-                    key={item.label}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className="p-5 border border-[#e8e7e4] hover:border-[#c9a227] hover:bg-[#c9a227]/[0.02] transition-colors duration-300"
-                  >
-                    <span className="block text-[11px] tracking-[0.2em] text-[#6b6b6b] mb-2 uppercase">{item.label}</span>
-                    <span className="text-sm text-[#1a1a1a] font-medium">{item.value}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
             {/* Three Identities Preview */}
             <div>
               <h3 className="text-xl font-serif font-light mb-6 text-[#c9a227]">三個身份</h3>
