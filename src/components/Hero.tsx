@@ -5,8 +5,8 @@ import Image from "next/image";
 
 export default function Hero() {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 80]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const y = useTransform(scrollY, [0, 700], [0, 120]);
+  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
 
   // Three pillars
   const pillars = [
@@ -24,28 +24,42 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-gray-50" />
+      {/* Premium Background - Subtle gradient with warmth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#fafaf8] to-[#f5f4f0]" />
+      
+      {/* Elegant corner accents */}
+      <motion.div 
+        className="absolute top-0 left-0 w-32 h-32 border-l border-t border-[#e8e7e4]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+      />
+      <motion.div 
+        className="absolute bottom-0 right-0 w-32 h-32 border-r border-b border-[#e8e7e4]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+      />
 
-      {/* Floating Particles - Restored */}
+      {/* Floating Particles - Sophisticated gold specks */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(5)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-accent/20 rounded-full"
+            className="absolute w-[3px] h-[3px] bg-[#c9a227]/20 rounded-full"
             style={{
-              left: `${20 + i * 15}%`,
-              top: `${20 + i * 10}%`,
+              left: `${10 + i * 12}%`,
+              top: `${15 + (i % 3) * 25}%`,
             }}
             animate={{
-              y: [0, -20, 0],
-              x: [0, 15, 0],
-              scale: [1, 1.2, 1],
+              y: [0, -30, 0],
+              x: [0, 20 + (i % 2) * 10, 0],
+              opacity: [0.3, 0.6, 0.3],
             }}
             transition={{
-              duration: 12 + i * 2,
+              duration: 14 + i * 2,
               repeat: Infinity,
-              delay: i * 2,
+              delay: i * 1.5,
               ease: "easeInOut",
             }}
           />
@@ -54,74 +68,82 @@ export default function Hero() {
 
       {/* Main Content */}
       <motion.div 
-        className="relative z-10 text-center px-6 max-w-4xl w-full"
+        className="relative z-10 text-center px-8 max-w-5xl w-full"
         style={{ y, opacity }}
       >
-        {/* Logo - Restored scale animation */}
+        {/* Logo with premium entrance */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-4"
+          initial={{ opacity: 0, scale: 0.85, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="mb-8"
         >
           <Image
             src="/kiaa-website/logo-kiaa.png"
             alt="KIAA Logo"
-            width={80}
-            height={80}
-            className="mx-auto"
+            width={72}
+            height={72}
+            className="mx-auto drop-shadow-sm"
             priority
           />
         </motion.div>
 
-        {/* Subtitle - Tight spacing */}
+        {/* Subtitle - Elegant spacing */}
         <motion.p
-          className="text-xs tracking-[0.25em] text-secondary mb-2"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-        >
-          WEI-YUAN (KEN) / 謙山敘事
-        </motion.p>
-
-        {/* Main Headline - Smaller size (3/4 of previous) */}
-        <motion.h1
-          className="text-2xl md:text-4xl lg:text-5xl font-light tracking-wide mb-2"
+          className="text-[11px] tracking-[0.3em] text-[#6b6b6b] mb-6 uppercase"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          transition={{ delay: 0.3, duration: 0.7 }}
         >
-          <span className="inline-block mx-1 md:mx-2 text-primary">設計力</span>
-          <span className="inline-block mx-1 md:mx-2 text-secondary/50">·</span>
-          <span className="inline-block mx-1 md:mx-2 text-primary">投資力</span>
-          <span className="inline-block mx-1 md:mx-2 text-secondary/50">·</span>
-          <span className="inline-block mx-1 md:mx-2 text-primary">傳承力</span>
+          WEI-YUAN (KEN) · 謙山敘事
+        </motion.p>
+
+        {/* Main Headline - Premium typography */}
+        <motion.h1
+          className="text-[28px] md:text-[40px] lg:text-[48px] font-light tracking-tight text-[#1a1a1a] mb-6 leading-tight"
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          <span className="inline-block mx-2 md:mx-3 text-[#1a1a1a]">設計力</span>
+          <span className="inline-block mx-2 md:mx-3 text-[#c9a227]">·</span>
+          <span className="inline-block mx-2 md:mx-3 text-[#1a1a1a]">投資力</span>
+          <span className="inline-block mx-2 md:mx-3 text-[#c9a227]">·</span>
+          <span className="inline-block mx-2 md:mx-3 text-[#1a1a1a]">傳承力</span>
         </motion.h1>
 
-        {/* Tagline - Tight spacing */}
+        {/* Tagline - Serif accent */}
         <motion.p
-          className="text-sm md:text-base font-serif text-accent mb-2 text-center"
-          initial={{ opacity: 0, y: 15 }}
+          className="text-lg md:text-xl font-serif text-[#c9a227] mb-8 text-center"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.5 }}
+          transition={{ delay: 0.7, duration: 0.7 }}
         >
           空間架構決策者
         </motion.p>
 
-        {/* Description - Tight spacing */}
+        {/* Description - Refined paragraph */}
         <motion.p
-          className="text-xs text-secondary leading-relaxed mb-4 max-w-md mx-auto text-center"
-          initial={{ opacity: 0, y: 15 }}
+          className="text-sm md:text-base text-[#6b6b6b] leading-relaxed mb-10 max-w-lg mx-auto text-center"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.5 }}
+          transition={{ delay: 0.9, duration: 0.7 }}
         >
           拒絕低效勞務，用系統定義規則。整合設計力、投資力與傳承力，
-          為您建構兼具美學與價值的空間解決方案。
+          <br className="hidden md:block" />為您建構兼具美學與價值的空間解決方案。
         </motion.p>
 
-        {/* Three Identities - Restored stagger animation */}
+        {/* Premium Divider */}
         <motion.div
-          className="flex flex-wrap justify-center gap-2 md:gap-4 mb-4"
+          className="w-16 h-[2px] bg-[#c9a227] mx-auto mb-10"
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ delay: 1.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        />
+
+        {/* Three Identities - Premium cards with stagger */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-3 md:gap-5 mb-12"
           initial="hidden"
           animate="visible"
           variants={{
@@ -129,7 +151,7 @@ export default function Hero() {
             visible: {
               opacity: 1,
               transition: {
-                staggerChildren: 0.1
+                staggerChildren: 0.12
               }
             }
           }}
@@ -137,40 +159,55 @@ export default function Hero() {
           {pillars.map((item, index) => (
             <motion.div
               key={item.name}
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 1.0 + index * 0.1, duration: 0.5 }}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className="px-4 py-2 border border-gray-200 hover:border-accent hover:bg-accent/5 transition-all duration-300 min-w-[100px]"
+              transition={{ delay: 1.2 + index * 0.12, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -6, scale: 1.02, borderColor: '#c9a227' }}
+              className="px-5 py-4 border border-[#e8e7e4] hover:bg-[#c9a227]/[0.03] transition-all duration-300 min-w-[120px] md:min-w-[140px]"
+              style={{ boxShadow: '0 0 0 transparent' }}
             >
-              <span className="block text-sm font-medium text-primary">{item.name}</span>
-              <span className="text-xs text-secondary">{item.label}</span>
+              <span className="block text-base font-medium text-[#1a1a1a] mb-1">{item.name}</span>
+              <span className="text-xs tracking-widest text-[#6b6b6b]">{item.label}</span>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Creator Info - Restored animation */}
+        {/* Creator Info - Refined layout */}
         <motion.div
-          className="flex flex-wrap justify-center gap-4 md:gap-8"
+          className="flex flex-wrap justify-center gap-6 md:gap-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 0.5 }}
+          transition={{ delay: 1.6, duration: 0.6 }}
         >
           {creatorInfo.map((item, index) => (
             <motion.div
               key={item.label}
-              initial={{opacity: 0, y: 10 }}
+              initial={{opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5 + index * 0.1 }}
-              className="text-left min-w-[80px]"
+              transition={{ delay: 1.7 + index * 0.1, duration: 0.5 }}
+              className="text-center min-w-[90px]"
             >
-              <span className="block text-xs tracking-widest text-primary font-medium mb-0.5">
+              <span className="block text-[11px] tracking-[0.2em] text-[#6b6b6b] font-medium mb-1 uppercase">
                 {item.label}
               </span>
-              <span className="text-xs text-secondary">{item.value}</span>
+              <span className="text-sm text-[#1a1a1a]">{item.value}</span>
             </motion.div>
           ))}
         </motion.div>
+      </motion.div>
+
+      {/* Scroll indicator - subtle and elegant */}
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 0.6 }}
+      >
+        <motion.div
+          className="w-[1px] h-12 bg-gradient-to-b from-[#c9a227]/40 to-transparent"
+          animate={{ scaleY: [1, 0.5, 1], opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
       </motion.div>
     </section>
   );

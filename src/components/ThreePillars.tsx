@@ -34,120 +34,105 @@ const pillars = [
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 60 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.15,
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  }),
-};
-
-const imageVariants = {
-  rest: { scale: 1 },
-  hover: { scale: 1.05 },
-};
-
 export default function ThreePillars() {
   return (
     <section id="stories" className="py-24 px-6 max-w-6xl mx-auto">
-      {/* Section Header */}
+      {/* Section Header - Premium spacing */}
       <motion.div
-        className="text-center mb-16"
+        className="text-center mb-20"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.8 }}
       >
-        <h2 className="text-3xl md:text-4xl font-light tracking-wider mb-4">
-          THREE PILLARS
-        </h2>
-        <span className="block text-sm tracking-widest text-secondary mt-3">
+        <motion.span 
+          className="text-[11px] tracking-[0.3em] text-[#c9a227] uppercase mb-4 block"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Three Pillars
+        </motion.span>
+        <h2 className="text-[28px] md:text-[36px] font-light tracking-tight text-[#1a1a1a] mb-4">
           三個品牌，一種信念
-        </span>
+        </h2>
+        <div className="w-12 h-[2px] bg-[#c9a227] mx-auto" />
       </motion.div>
 
-      {/* Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Cards Grid - Premium cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {pillars.map((pillar, index) => (
           <motion.div
             key={pillar.number}
             className="group cursor-pointer"
-            custom={index}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            variants={cardVariants}
+            transition={{ delay: index * 0.15, duration: 0.7 }}
             whileHover={{ y: -8 }}
-            transition={{ type: "spring", stiffness: 300, damping: 22 }}
           >
-            {/* Card Image */}
+            {/* Card Image - Premium placeholder */}
             <motion.div
-              className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden mb-6"
-              variants={imageVariants}
-              initial="rest"
-              whileHover="hover"
-              transition={{ duration: 0.4 }}
+              className="aspect-[4/3] bg-gradient-to-br from-[#f5f4f0] to-[#e8e7e4] relative overflow-hidden mb-6"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.5 }}
             >
-              {/* Image overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+              {/* Subtle overlay pattern */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#c9a227]/5 to-transparent" />
               
-              {/* Decorative line on hover */}
+              {/* Corner accent on hover */}
               <motion.div
-                className="absolute inset-0 bg-accent/5 origin-bottom"
-                initial={{ scaleY: 0 }}
-                whileHover={{ scaleY: 1 }}
-                transition={{ duration: 0.6 }}
+                className="absolute top-0 right-0 w-16 h-16 border-r border-t border-[#c9a227]/20"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
               />
             </motion.div>
 
-            {/* Card Content */}
+            {/* Card Content - Refined typography */}
             <div className="space-y-3">
-              <span className="text-xs tracking-[0.2em] text-accent">
+              <motion.span className="text-[11px] tracking-[0.25em] text-[#c9a227] uppercase">
                 {pillar.number} — {pillar.label}
-              </span>
+              </motion.span>
               
-              <h3 className="text-2xl font-serif font-light group-hover:text-accent transition-colors duration-300">
+              <h3 className="text-xl font-serif font-light text-[#1a1a1a] group-hover:text-[#c9a227] transition-colors duration-300">
                 {pillar.title}
               </h3>
               
-              <p className="text-xs tracking-widest text-secondary">
-{pillar.subtitle}
+              <p className="text-[11px] tracking-[0.2em] text-[#6b6b6b] uppercase">
+                {pillar.subtitle}
               </p>
               
-              <p className="text-sm text-secondary leading-relaxed">
+              <p className="text-sm text-[#6b6b6b] leading-relaxed">
                 {pillar.description}
               </p>
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 pt-2">
+              {/* Premium Tags */}
+              <div className="flex flex-wrap gap-2 pt-3">
                 {pillar.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs px-3 py-1 bg-gray-100 text-secondary group-hover:bg-primary group-hover:text-white transition-colors duration-300"
+                    className="text-[11px] px-3 py-1.5 bg-[#f5f4f0] text-[#6b6b6b] tracking-wider group-hover:bg-[#1a1a1a] group-hover:text-white transition-colors duration-300"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              {/* CTA Button */}
+              {/* Premium CTA */}
               <motion.div
-                className="pt-4"
+                className="pt-5"
                 whileHover={{ x: 4 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
               >
                 <Link
                   href={pillar.href}
-                  className="inline-flex items-center gap-2 text-xs tracking-widest group-hover:text-accent transition-colors"
+                  className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase text-[#1a1a1a] group-hover:text-[#c9a227] transition-colors"
                 >
                   探索
                   <motion.span
-                    animate={{ x: [0, 4, 0] }}
+                    animate={{ x: [0, 5, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
                     <ArrowRight size={14} />

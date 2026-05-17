@@ -2,36 +2,32 @@
 
 import { motion } from "framer-motion";
 
-// Animation variants
-const fadeInUp = {
-  initial: { opacity: 0, y: 40 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-};
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.15
-    }
-  }
-};
-
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6">
+    <section id="about" className="py-32 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
         
-        {/* Section Header */}
+        {/* Section Header - Premium layout */}
         <motion.div 
-          className="text-center mb-20"
+          className="text-center mb-24"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl md:text-4xl font-light tracking-wider mb-4">ABOUT</h2>
-          <span className="block text-sm tracking-widest text-secondary mt-3">關於維元</span>
+          <motion.span 
+            className="text-[11px] tracking-[0.3em] text-[#c9a227] uppercase mb-4 block"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            About
+          </motion.span>
+          <h2 className="text-[28px] md:text-[36px] font-light tracking-tight text-[#1a1a1a] mb-4">
+            關於維元
+          </h2>
+          <div className="w-12 h-[2px] bg-[#c9a227] mx-auto" />
         </motion.div>
 
         {/* Main Content Grid */}
@@ -45,9 +41,9 @@ export default function About() {
             transition={{ duration: 0.8 }}
           >
             {/* Brand Story */}
-            <div className="mb-16">
-              <h3 className="text-2xl font-serif font-light mb-6 text-accent">品牌故事</h3>
-              <div className="space-y-4 text-secondary leading-relaxed">
+            <div className="mb-12">
+              <h3 className="text-xl font-serif font-light mb-6 text-[#c9a227]">品牌故事</h3>
+              <div className="space-y-5 text-[#6b6b6b] leading-[1.9]">
                 <p>
                   我是張維元 (Ken)，一位拒絕低效勞務、用系統定義規則的空間架構決策者。
                 </p>
@@ -59,19 +55,16 @@ export default function About() {
                   我的設計哲學源自「密涅瓦思維」：每一次決定之前，先問自己——
                   這個選擇的機會成本是什麼？真正的系統動力在哪裡？
                 </p>
-                <p>
-                  藍鷹的宏觀視野讓我看見建築不只是結構，而是生活與記憶的容器。
-                </p>
               </div>
             </div>
 
-            {/* Core Philosophy */}
-            <div className="p-8 bg-gray-100 rounded-sm">
-              <h4 className="text-lg font-serif text-primary mb-4">核心理念</h4>
-              <p className="text-secondary text-sm leading-relaxed mb-4">
+            {/* Core Philosophy - Premium card */}
+            <div className="p-8 bg-[#fafaf8] border-l-2 border-[#c9a227]">
+              <h4 className="text-base font-serif text-[#1a1a1a] mb-4">核心理念</h4>
+              <p className="text-sm text-[#6b6b6b] leading-relaxed mb-4">
                 「內實外虛、謙下歸一」——這不只是設計原則，更是一種生活哲學。
               </p>
-              <p className="text-secondary text-sm leading-relaxed">
+              <p className="text-sm text-[#6b6b6b] leading-relaxed">
                 我相信好的設計源於對自我的深刻理解。每一個專案都是一場探索與對話，
                 而真正的創新，往往發生在系統與直覺的交界處。
               </p>
@@ -88,8 +81,8 @@ export default function About() {
           >
             {/* Professional Background */}
             <div>
-              <h3 className="text-2xl font-serif font-light mb-6 text-accent">專業背景</h3>
-              <div className="space-y-4">
+              <h3 className="text-xl font-serif font-light mb-6 text-[#c9a227]">專業背景</h3>
+              <div className="space-y-5">
                 {[
                   { title: "建築設計", desc: "專注於住宅、商業空間與室內設計，每個專案都是對場所精神的探索" },
                   { title: "數位創作", desc: "結合 AI 工具與設計系統，用代碼建構創意解決方案" },
@@ -103,19 +96,19 @@ export default function About() {
                     transition={{ delay: index * 0.1, duration: 0.5 }}
                     className="flex gap-4"
                   >
-                    <span className="text-xs tracking-widest text-accent mt-1">0{index + 1}</span>
+                    <span className="text-[11px] tracking-[0.2em] text-[#c9a227] mt-1 uppercase">0{index + 1}</span>
                     <div>
-                      <h4 className="text-lg font-medium text-primary mb-1">{item.title}</h4>
-                      <p className="text-sm text-secondary leading-relaxed">{item.desc}</p>
+                      <h4 className="text-base font-medium text-[#1a1a1a] mb-1">{item.title}</h4>
+                      <p className="text-sm text-[#6b6b6b] leading-relaxed">{item.desc}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
             </div>
 
-            {/* Design Traits */}
+            {/* Design Traits - Premium grid */}
             <div>
-              <h3 className="text-2xl font-serif font-light mb-6 text-accent">設計特質</h3>
+              <h3 className="text-xl font-serif font-light mb-6 text-[#c9a227]">設計特質</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
                   { label: "人類圖類型", value: "顯示生產者" },
@@ -129,10 +122,10 @@ export default function About() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className="p-4 border border-gray-200 hover:border-accent transition-colors duration-300"
+                    className="p-5 border border-[#e8e7e4] hover:border-[#c9a227] hover:bg-[#c9a227]/[0.02] transition-colors duration-300"
                   >
-                    <span className="block text-xs tracking-widest text-secondary mb-1">{item.label}</span>
-                    <span className="text-sm text-primary font-medium">{item.value}</span>
+                    <span className="block text-[11px] tracking-[0.2em] text-[#6b6b6b] mb-2 uppercase">{item.label}</span>
+                    <span className="text-sm text-[#1a1a1a] font-medium">{item.value}</span>
                   </motion.div>
                 ))}
               </div>
@@ -140,10 +133,10 @@ export default function About() {
 
             {/* Three Identities Preview */}
             <div>
-              <h3 className="text-2xl font-serif font-light mb-6 text-accent">三個身份</h3>
+              <h3 className="text-xl font-serif font-light mb-6 text-[#c9a227]">三個身份</h3>
               <div className="space-y-3">
                 {[
-{ name: "謙山敘事", en: "Mountain Narrative", priority: "優先" },
+                  { name: "謙山敘事", en: "Mountain Narrative", priority: "優先" },
                   { name: "謙光學舍", en: "Kenko", priority: "其次" },
                   { name: "謙一建築", en: "Kenichi Architect", priority: "其三" },
                 ].map((item, index) => (
@@ -153,15 +146,15 @@ export default function About() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1, duration: 0.5 }}
-                    className="flex items-center justify-between p-4 bg-white hover:bg-gray-50 transition-colors duration-300 group"
+                    className="flex items-center justify-between p-4 bg-[#fafaf8] hover:bg-[#f5f4f0] transition-colors duration-300 group"
                   >
                     <div>
-                      <h4 className="text-sm font-medium text-primary group-hover:text-accent transition-colors">
+                      <h4 className="text-sm font-medium text-[#1a1a1a] group-hover:text-[#c9a227] transition-colors">
                         {item.name}
                       </h4>
-                      <span className="text-xs text-secondary">{item.en}</span>
+                      <span className="text-[11px] text-[#6b6b6b]">{item.en}</span>
                     </div>
-                    <span className="text-xs tracking-widest text-accent">{item.priority}</span>
+                    <span className="text-[11px] tracking-[0.15em] text-[#c9a227] uppercase">{item.priority}</span>
                   </motion.div>
                 ))}
               </div>
@@ -169,26 +162,27 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Quote Section */}
+        {/* Quote Section - Premium styling */}
         <motion.div 
-          className="mt-24 text-center"
+          className="mt-28 text-center"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
           <blockquote className="max-w-2xl mx-auto">
-            <p className="text-xl md:text-2xl font-serif text-primary leading-relaxed mb-4">
+            <p className="text-lg md:text-xl font-serif text-[#1a1a1a] leading-relaxed mb-6">
               「我是張維元，拒絕低效勞務、用系統定義規則，
               整合『設計力、投資力、傳承力』的空間架構決策者。」
             </p>
-            <cite className="text-sm tracking-widest text-secondary not-italic">
+            <div className="w-12 h-[2px] bg-[#c9a227] mx-auto mb-4" />
+            <cite className="text-[11px] tracking-[0.2em] text-[#6b6b6b] not-italic uppercase">
               — 維元，2024
             </cite>
           </blockquote>
         </motion.div>
 
-        {/* Contact CTA */}
+        {/* Contact CTA - Premium button */}
         <motion.div 
           className="mt-16 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -196,10 +190,10 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-sm text-secondary mb-4">想了解更多，或有任何合作機會</p>
+          <p className="text-sm text-[#6b6b6b] mb-5">想了解更多，或有任何合作機會</p>
           <a 
             href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white text-sm tracking-widest hover:bg-accent transition-colors duration-300"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-[#1a1a1a] text-white text-[11px] tracking-[0.2em] uppercase hover:bg-[#c9a227] transition-colors duration-300"
           >
             取得聯繫
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

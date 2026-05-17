@@ -4,6 +4,7 @@ import ThreePillars from "@/components/ThreePillars";
 import Philosophy from "@/components/Philosophy";
 import About from "@/components/About";
 import CoreValues from "@/components/CoreValues";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
         <Philosophy />
         <About />
         <CoreValues />
+        <Contact />
       </main>
       <Footer />
     </>
