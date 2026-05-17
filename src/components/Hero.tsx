@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
-import Image from "next/image";
+
 
 export default function Hero() {
   const { scrollY } = useScroll();
@@ -163,23 +163,7 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Bottom Logo - Inverted style (white on dark) */}
-      <motion.div 
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-      >
-        <div className="w-16 h-16 border border-white/40 flex items-center justify-center">
-          <Image
-            src="/kiaa-website/logo-kiaa.png"
-            alt="KIAA"
-            width={40}
-            height={40}
-            className="brightness-0 invert opacity-80"
-          />
-        </div>
-      </motion.div>
+      {/* Content ends here */}
     </section>
   );
 }
